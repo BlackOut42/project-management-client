@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import Homepage from "./Homepage";
 import About from "./About";
 import Login from "./Login";
+import PingAlertComponent from "./pingAlertComponent";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     <Router>
       <div className="App">
         <NavBar />
+        <PingAlertComponent />
         <div className="App-content">
           <Routes>
             <Route path="/" element={<Homepage />} />
