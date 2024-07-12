@@ -5,7 +5,7 @@ import Homepage from "./Homepage";
 import About from "./About";
 import Login from "./Login";
 import PingAlertComponent from "./pingAlertComponent";
-import "./App.css";
+import "./styles/App.css";
 
 function App() {
   return (

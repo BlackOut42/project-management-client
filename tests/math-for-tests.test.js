@@ -1,4 +1,4 @@
-const { add, subtract, divide, multiply } = require("./math-for-tests");
+const { add, subtract, divide, multiply } = require("../src/math-for-tests");
 
 describe("math-for-tests.js", () => {
   it("should test add ", () => {
