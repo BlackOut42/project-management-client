@@ -1,6 +1,6 @@
 {
-  "hompage": "http://blackout42.github.io/project-management-client/",
   "name": "project-management-client",
+  "homepage": "https://BlackOut42.github.io/project-management-client",
   "version": "0.1.0",
   "proxy": "http://localhost:5000",
   "private": true,
@@ -16,9 +16,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "jest": "^27.5.1"
   },
   "description": "Project Management course client side",
