@@ -1,42 +1,43 @@
 import React, { useState } from "react";
-import "./Login.css"; // Import your Login-specific CSS file
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Password validation
-    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
-    if (!passwordPattern.test(password)) {
-      setError(
-        "Password must be at least 8 characters long, contain at least one special character, and one capital letter."
-      );
-      return;
+    try {
+      const response = await axios.post("http://localhost:5000/login", {
+        username,
+        password,
+      });
+
+      console.log("Login response:", response.data); // Logging the response to console.
+
+      // Assuming successful login redirects to homepage
+      navigate("/homepage");
+    } catch (error) {
+      setError("Invalid username or password"); // Handle login failure
     }
-
-    // If validation passes
-    setError("");
-    console.log("Username:", username);
-    console.log("Password:", password);
-
-    // Proceed with login logic
   };
 
   return (
     <div className="login-container">
-      <h2>Login</h2> {/* Header is placed above the form */}
+      <h2>Login</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <label>
           Username:
           <input
             type="text"
-            className="login-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className="login-input"
             required
           />
         </label>
@@ -44,9 +45,9 @@ const Login = () => {
           Password:
           <input
             type="password"
-            className="login-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="login-input"
             required
           />
         </label>
