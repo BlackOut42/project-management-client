@@ -1,4 +1,4 @@
-name: Unit Tests
+name: tests dependencies and deployment
 
 on:
   push:
@@ -30,3 +30,9 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deplot-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: build
