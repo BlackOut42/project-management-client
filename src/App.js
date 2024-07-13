@@ -15,22 +15,10 @@ function App() {
         <PingAlertComponent />
         <div className="App-content">
           <Routes>
-            <Route
-              path="https://foodiefriends.onrender.com/"
-              element={<Homepage />}
-            />
-            <Route
-              path="https://foodiefriends.onrender.com/homepage"
-              element={<Homepage />}
-            />
-            <Route
-              path="https://foodiefriends.onrender.com/about"
-              element={<About />}
-            />
-            <Route
-              path="https://foodiefriends.onrender.com/login"
-              element={<Login />}
-            />
+            <Route path="/" element={<Homepage />} />
+            <Route path="/homepage" element={<Homepage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
