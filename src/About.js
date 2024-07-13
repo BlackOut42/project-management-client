@@ -13,6 +13,7 @@ function About() {
   }, []);
   return (
     <div className="centered-container">
+      // eslint-disable-next-line
       {typeof backendData.Team === "undefined" ? (
         <p>Loading Team...</p>
       ) : (
