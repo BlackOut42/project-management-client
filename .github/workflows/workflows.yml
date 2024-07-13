@@ -27,12 +27,7 @@ jobs:
 
       - name: Install and build
         run: npm install
-             npm build
+          npm build
 
       - name: Run tests
         run: npm test
-
-      -  name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: build # The folder the action should deploy
