@@ -1,12 +1,23 @@
 import React, { useEffect } from "react";
 
 const PingAlertComponent = () => {
+  
   useEffect(() => {
+    
+
     const checkPath = () => {
       if (
         window.location.pathname === "/ping"
       ) {
-        alert("Pong:Team 4"); // Display alert when visiting "/ping"
+        fetch("https://project-management-server-4av5.onrender.com/ping").then(
+          (response) => {
+            response.json().then((message) => {
+              alert(message); // Display alert when visiting "/ping"
+              
+            });
+          }
+        );
+        
       }
     };
 
