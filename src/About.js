@@ -4,16 +4,17 @@ function About() {
   const [backendData, setBackendData] = useState([]);
 
   useEffect(() => {
-    fetch("/about").then((response) => {
-      response.json().then((data) => {
-        console.log(backendData.Team);
-        setBackendData(data);
-      });
-    });
+    fetch("https://project-management-server-4av5.onrender.com/about").then(
+      (response) => {
+        response.json().then((data) => {
+          console.log(backendData.Team);
+          setBackendData(data);
+        });
+      }
+    );
   }, []);
   return (
     <div className="centered-container">
-      // eslint-disable-next-line
       {typeof backendData.Team === "undefined" ? (
         <p>Loading Team...</p>
       ) : (
