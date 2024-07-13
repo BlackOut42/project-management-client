@@ -2,7 +2,7 @@
   "name": "project-management-client",
   "homepage": "https://foodiefriends.onrender.com/",
   "version": "0.1.0",
-  "proxy": "https://project-management-server-4av5.onrender.com",
+  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

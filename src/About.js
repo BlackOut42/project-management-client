@@ -4,7 +4,7 @@ function About() {
   const [backendData, setBackendData] = useState([]);
 
   useEffect(() => {
-    fetch("https://project-management-server-4av5.onrender.com/about").then(
+    fetch("http://localhost:5000/about").then(
       (response) => {
         response.json().then((data) => {
           console.log(backendData.Team);

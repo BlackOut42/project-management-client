@@ -9,7 +9,7 @@ const PingAlertComponent = () => {
       if (
         window.location.pathname === "/ping"
       ) {
-        fetch("https://project-management-server-4av5.onrender.com/ping").then(
+        fetch("http://localhost:5000/ping").then(
           (response) => {
             response.json().then((message) => {
               alert(message); // Display alert when visiting "/ping"
