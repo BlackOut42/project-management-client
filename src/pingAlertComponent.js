@@ -4,7 +4,7 @@ const PingAlertComponent = () => {
   useEffect(() => {
     const checkPath = () => {
       if (
-        window.location.pathname === "https://foodiefriends.onrender.com/ping"
+        window.location.pathname === "/ping"
       ) {
         alert("Pong:Team 4"); // Display alert when visiting "/ping"
       }
