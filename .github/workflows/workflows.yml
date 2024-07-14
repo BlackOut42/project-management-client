@@ -18,10 +18,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -31,3 +31,14 @@ jobs:
 
       - name: Run tests
         run: npm test
+        deploy:
+          name: Deploy
+          needs: [test] # Our tests must pass in order to run the deploy job
+          runs-on: ubuntu-latest
+
+          steps:
+            - name: Deploy to production
+              uses: johnbeynon/render-deploy-action@v0.0.8
+              with:
+                service-id: ${{ secrets.SERVICE_ID }}
+                api-key: ${{ secrets.RENDER_API_KEY }}
