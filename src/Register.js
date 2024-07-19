@@ -56,7 +56,7 @@ const Register = () => {
         </label>
         {error && <p className="LogReg-error">{error}</p>}
         <button type="submit" className="LogReg-button">
-          Login
+          Sign Up
         </button>
       </form>
     </div>
