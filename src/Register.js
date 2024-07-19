@@ -4,7 +4,7 @@ import axios from "axios";
 import { app as firebaseApp } from "./config/firebaseConfig";
 import "./styles/LogReg.css";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,28 +12,27 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await axios.post(
-        "https://project-management-server-4av5.onrender.com/login",
+        "https://project-management-server-4av5.onrender.com/register",
         {
           email,
           password,
         }
       );
 
-      console.log("Login response:", response.data); // Logging the response to console.
+      console.log("Register response:", response.data); // Registration the response to console.
 
-      // Assuming successful login redirects to homepage
+      // Assuming successful registration redirects to homepage
       navigate("/homepage");
     } catch (error) {
-      setError(`${error.response.data.error}`); // Handle login failure
+      setError(`${error.response.data.error}`); // Handle registration failure
     }
   };
 
   return (
     <div className="LogReg-container">
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form className="LogReg-form" onSubmit={handleSubmit}>
         <label>
           Email:
@@ -64,4 +63,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

@@ -1,6 +1,6 @@
-/* Login.css */
+/* LogReg.css */
 
-.login-container {
+.LogReg-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,7 @@
   height: 100vh; /* Adjust as needed */
 }
 
-.login-form {
+.LogReg-form {
   max-width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -18,12 +18,12 @@
   text-align: center; /* Center form content */
 }
 
-.login-form label {
+.LogReg-form label {
   display: block;
   margin-bottom: 10px;
 }
 
-.login-input {
+.LogReg-input {
   width: 100%;
   padding: 8px;
   font-size: 1em;
@@ -33,7 +33,7 @@
   margin-bottom: 10px; /* Space between inputs */
 }
 
-.login-button {
+.LogReg-button {
   display: block;
   width: 100%;
   padding: 10px;
@@ -44,11 +44,11 @@
   cursor: pointer;
 }
 
-.login-button:hover {
+.LogReg-button:hover {
   background-color: #0056b3;
 }
 
-.login-error {
+.LogReg-error {
   color: red;
   font-size: 0.9em;
   margin-top: 5px;
