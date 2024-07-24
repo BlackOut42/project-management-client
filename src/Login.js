@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { app as firebaseApp } from "./config/firebaseConfig";
+import { AuthContext } from "./authContext";
 import "./styles/LogReg.css";
 
 const Login = () => {
@@ -9,10 +9,10 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await axios.post(
         "https://project-management-server-4av5.onrender.com/login",
@@ -21,12 +21,16 @@ const Login = () => {
           password,
         }
       );
+      console.log(response.data.user);
+      // Save token and user to localStorage
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      // Update AuthContext with user data
+      login({ user: response.data.user, token: response.data.token });
 
-      console.log("Login response:", response.data); // Logging the response to console.
-
-      // Assuming successful login redirects to homepage
       navigate("/homepage");
     } catch (error) {
+      console.log(error);
       setError(`${error.response.data.error}`); // Handle login failure
     }
   };

@@ -17,10 +17,12 @@ body {
   margin: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .navbar ul li {
   display: inline;
+  margin-right: 15px;
 }
 
 .navbar ul li a {
@@ -30,5 +32,18 @@ body {
 }
 
 .navbar ul li a:hover {
+  background-color: #0056b3;
+}
+
+.navbar ul li button {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar ul li button:hover {
   background-color: #0056b3;
 }

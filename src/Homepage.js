@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "./authContext"; // Adjust import if necessary
 
 const Homepage = () => {
+  const { authData } = useContext(AuthContext);
+  const user = authData?.user;
+
   return (
     <div className="centered-container">
-      <h2>Homepage</h2>
+      {user ? (
+        <h2>{`${user.firstName} Welcome 😄!`}</h2>
+      ) : (
+        <h2>Welcome to the Homepage</h2>
+      )}
       {/* Other homepage content */}
     </div>
   );
