@@ -6,7 +6,9 @@ const Post = ({ post }) => {
     <div className="post">
       <h2>{post.title}</h2>
       <p>{post.body}</p>
-      <p>Author: {post.author}</p>
+      <small>
+        Author: <i>{post.author}</i>
+      </small>
       {post.comments && post.comments.length > 0 && (
         <div className="comments">
           <h3>Comments</h3>

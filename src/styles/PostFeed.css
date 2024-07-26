@@ -7,6 +7,7 @@
   box-sizing: border-box; /* Ensure padding and border are included in the width */
   overflow: hidden; /* Prevent content from overflowing */
   position: relative; /* Ensure relative positioning within the container */
+  text-align: center;
 }
 
 .post {

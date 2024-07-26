@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Post from "./Post"; // Adjust import path as necessary
 import "./styles/PostFeed.css";
 
 const PostFeed = () => {
@@ -52,29 +53,10 @@ const PostFeed = () => {
   return (
     <div className="post-feed">
       {posts.map((post) => (
-        <div key={post.id} className="post">
-          <h2>{post.title}</h2>
-          <p>{post.body}</p>
-          <div className="comments">
-            {post.comments?.length > 0 && (
-              <>
-                {post.comments.map((comment, index) => (
-                  <div key={index} className="comment">
-                    <p>{comment.text}</p>
-                    <small>
-                      {new Date(
-                        comment.createdAt.seconds * 1000
-                      ).toLocaleString()}
-                    </small>
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-        </div>
+        <Post key={post.id} post={post} />
       ))}
 
-      <button onClick={handleLoadMore}>
+      <button onClick={handleLoadMore} disabled={loading}>
         {loading ? "Loading..." : "Load More"}
       </button>
     </div>
