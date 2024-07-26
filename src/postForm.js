@@ -39,6 +39,7 @@ const PostForm = () => {
         {
           title: title,
           body: body,
+          author: localStorage.getItem("user"),
         },
         {
           headers: {
