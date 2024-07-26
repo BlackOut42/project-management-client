@@ -13,8 +13,8 @@ const Homepage = () => {
       <div className="greeting-section">
         {user ? (
           <>
-            <PostForm />
             <h2>{`${user.firstName}, Welcome 😄!`}</h2>
+            <PostForm />
           </>
         ) : (
           <h2>Welcome to the Homepage</h2>
