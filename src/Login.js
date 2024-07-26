@@ -23,10 +23,10 @@ const Login = () => {
       );
       console.log(response.data.user);
       // Save token and user to localStorage
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.idToken);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       // Update AuthContext with user data
-      login({ user: response.data.user, token: response.data.token });
+      login({ user: response.data.user, token: response.data.idToken });
 
       navigate("/homepage");
     } catch (error) {

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "./authContext"; // Adjust import if necessary
+import PostForm from "./postForm";
 
 const Homepage = () => {
   const { authData } = useContext(AuthContext);
@@ -8,7 +9,10 @@ const Homepage = () => {
   return (
     <div className="centered-container">
       {user ? (
-        <h2>{`${user.firstName} Welcome 😄!`}</h2>
+        <>
+          <PostForm />
+          <h2>{`${user.firstName} Welcome 😄!`}</h2>
+        </>
       ) : (
         <h2>Welcome to the Homepage</h2>
       )}

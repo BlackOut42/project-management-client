@@ -23,7 +23,8 @@
   margin-bottom: 10px;
 }
 
-.LogReg-input {
+.LogReg-input,
+.LogReg-textarea {
   width: 100%;
   padding: 8px;
   font-size: 1em;
@@ -31,6 +32,12 @@
   border-radius: 4px;
   box-sizing: border-box;
   margin-bottom: 10px; /* Space between inputs */
+}
+
+.LogReg-textarea {
+  height: 100px; /* Adjust height as needed */
+  resize: none; /* Prevent resizing */
+  overflow-y: auto; /* Ensure scrollbar appears if content exceeds height */
 }
 
 .LogReg-button {
