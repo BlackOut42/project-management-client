@@ -3,6 +3,7 @@ import axios from "axios";
 import Post from "./Post";
 import { AuthContext } from "./authContext";
 import "./styles/PostFeed.css";
+
 const PostFeed = () => {
   const { authData } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
@@ -51,6 +52,20 @@ const PostFeed = () => {
     fetchPosts();
   };
 
+  const handlePostUpdated = (updatedPost, deletedPostId) => {
+    setPosts((prevPosts) => {
+      if (deletedPostId) {
+        return prevPosts.filter((post) => post.id !== deletedPostId);
+      }
+      if (updatedPost && updatedPost.id) {
+        return prevPosts.map((post) =>
+          post.id === updatedPost.id ? updatedPost : post
+        );
+      }
+      return prevPosts;
+    });
+  };
+
   return (
     <div className="post-feed">
       {posts.map((post) => (
@@ -59,6 +74,7 @@ const PostFeed = () => {
           post={post}
           currentUser={authData?.user}
           token={authData?.token}
+          onPostUpdated={handlePostUpdated}
         />
       ))}
 

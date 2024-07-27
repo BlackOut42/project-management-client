@@ -1,0 +1,46 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-input,
+.modal-textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.modal-textarea {
+  resize: none; /* Make textarea non-resizable */
+  height: 100px; /* Set a fixed height */
+}
