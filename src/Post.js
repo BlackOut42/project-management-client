@@ -120,6 +120,7 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
             value={commentBody}
             onChange={handleCommentChange}
             placeholder="Write a comment..."
+            maxLength="255"
           />
           <button type="submit">Add Comment</button>
         </form>
