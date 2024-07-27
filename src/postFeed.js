@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import Post from "./Post"; // Adjust import path as necessary
+import Post from "./Post";
+import { AuthContext } from "./authContext";
 import "./styles/PostFeed.css";
-
 const PostFeed = () => {
+  const { authData } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   const [lastVisible, setLastVisible] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -53,7 +54,12 @@ const PostFeed = () => {
   return (
     <div className="post-feed">
       {posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post
+          key={post.id}
+          post={post}
+          currentUser={authData?.user}
+          token={authData?.token}
+        />
       ))}
 
       <button onClick={handleLoadMore} disabled={loading}>
