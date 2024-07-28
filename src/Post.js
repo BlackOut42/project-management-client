@@ -17,13 +17,17 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
   const [likePopupVisible, setLikePopupVisible] = useState(false);
   const [likeNames, setLikeNames] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
   const hoverTimeoutRef = useRef(null); // Use ref to keep track of the timeout
 
   useEffect(() => {
     if (currentUser && currentUser.bookmarks) {
       setIsBookmarked(currentUser.bookmarks.includes(post.id));
     }
-  }, [currentUser, post.id]);
+    if (currentUser && currentUser.following) {
+      setIsFollowing(currentUser.following.includes(post.uid));
+    }
+  }, [currentUser, post.id, post.uid]);
 
   const handleCommentChange = (e) => {
     setCommentBody(e.target.value);
@@ -87,7 +91,7 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://project-management-server-4av5.onrender.com/delete-post/${post.id}`,
+        `http://project-management-server-4av5.onrender.com/delete-post/${post.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -145,6 +149,25 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
     }
   };
 
+  const handleToggleFollow = async () => {
+    if (!currentUser) return; // Ensure currentUser is defined
+    try {
+      const response = await axios.post(
+        `https://project-management-server-4av5.onrender.com/toggle-follow/${post.uid}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setIsFollowing(response.data.following);
+    } catch (error) {
+      console.error("Error toggling follow:", error);
+    }
+  };
+
   const fetchLikeNames = async () => {
     try {
       const response = await axios.get(
@@ -176,6 +199,11 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
         <p>{post.body}</p>
         <small>
           Author: <i>{post.author}</i>
+          {currentUser && currentUser.uid !== post.uid && (
+            <button onClick={handleToggleFollow} className="follow-button">
+              {isFollowing ? "Unfollow" : "Follow"}
+            </button>
+          )}
         </small>
         {authData?.user?.uid === post.uid || authData?.user?.isAdmin ? (
           <div>
@@ -185,7 +213,10 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
         ) : null}
       </div>
       <div className="post-actions">
-        <div className="like-container">
+        <div
+          className="like-container"
+          style={{ position: "relative", display: "inline-block" }}
+        >
           <button
             onClick={handleToggleLike}
             onMouseEnter={handleMouseEnter}
@@ -199,7 +230,7 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
           </div>
         </div>
         {currentUser && (
-          <button onClick={handleToggleBookmark}>
+          <button onClick={handleToggleBookmark} className="bookmark-button">
             {isBookmarked ? "Saved" : "Save"}
           </button>
         )}

@@ -108,3 +108,17 @@
 .post-actions button:hover {
   background-color: #0056b3;
 }
+.follow-button {
+  margin-left: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.follow-button:hover {
+  background-color: #0056b3;
+}
