@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "./authContext";
-import "./styles/LogReg.css";
+import "./styles/PostForm.css";
 
 const PostForm = () => {
   const { authData } = useContext(AuthContext);
@@ -69,41 +69,39 @@ const PostForm = () => {
   }
 
   return (
-    <div className="LogReg-container">
-      <button onClick={toggleFormVisibility} className="LogReg-button">
-        {isFormVisible ? "Close Post Form" : "Open Post Form"}
+    <div className="PostForm-container">
+      <button onClick={toggleFormVisibility} className="PostForm-button">
+        {isFormVisible ? "Cancel" : "Create Post"}
       </button>
-      {isFormVisible && (
-        <div className="LogReg-form">
-          <h2>Create Post</h2>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Title:
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="LogReg-input"
-                required
-              />
-            </label>
-            <label>
-              Body:
-              <textarea
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                className="LogReg-textarea"
-                required
-                maxLength="255"
-              />
-            </label>
-            {error && <p className="LogReg-error">{error}</p>}
-            <button type="submit" className="LogReg-button">
-              Submit Post
-            </button>
-          </form>
-        </div>
-      )}
+      <div className={`PostForm-form ${isFormVisible ? "visible" : ""}`}>
+        <h2>Create Post</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Title:
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="PostForm-input"
+              required
+            />
+          </label>
+          <label>
+            Body:
+            <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              className="PostForm-textarea"
+              required
+              maxLength="255"
+            />
+          </label>
+          {error && <p className="PostForm-error">{error}</p>}
+          <button type="submit" className="PostForm-button">
+            Submit Post
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

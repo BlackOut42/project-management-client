@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import axios from "axios";
 import Comment from "./Comment";
 import Modal from "./Modal";
@@ -12,6 +12,18 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
   const [editedBody, setEditedBody] = useState(post.body);
   const [commentBody, setCommentBody] = useState("");
   const [comments, setComments] = useState(post.comments || []);
+  const [likes, setLikes] = useState(post.likes || []);
+  const [likeCount, setLikeCount] = useState(post.likeCount || 0);
+  const [likePopupVisible, setLikePopupVisible] = useState(false);
+  const [likeNames, setLikeNames] = useState([]);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const hoverTimeoutRef = useRef(null); // Use ref to keep track of the timeout
+
+  useEffect(() => {
+    if (currentUser && currentUser.bookmarks) {
+      setIsBookmarked(currentUser.bookmarks.includes(post.id));
+    }
+  }, [currentUser, post.id]);
 
   const handleCommentChange = (e) => {
     setCommentBody(e.target.value);
@@ -89,6 +101,74 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
     }
   };
 
+  const handleToggleLike = async () => {
+    if (!currentUser) return; // Ensure currentUser is defined
+    try {
+      const response = await axios.post(
+        `https://project-management-server-4av5.onrender.com/toggle-like/${post.id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.userLiked) {
+        setLikes(likes.filter((uid) => uid !== currentUser.uid));
+        setLikeCount(likeCount - 1);
+      } else {
+        setLikes([...likes, currentUser.uid]);
+        setLikeCount(likeCount + 1);
+      }
+    } catch (error) {
+      console.error("Error toggling like:", error);
+    }
+  };
+
+  const handleToggleBookmark = async () => {
+    if (!currentUser) return; // Ensure currentUser is defined
+    try {
+      const response = await axios.post(
+        `https://project-management-server-4av5.onrender.com/toggle-bookmark/${post.id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setIsBookmarked(!isBookmarked);
+    } catch (error) {
+      console.error("Error toggling bookmark:", error);
+    }
+  };
+
+  const fetchLikeNames = async () => {
+    try {
+      const response = await axios.get(
+        `https://project-management-server-4av5.onrender.com/post-likes/${post.id}`
+      );
+
+      setLikeNames(response.data.likes);
+    } catch (error) {
+      console.error("Error fetching like names:", error);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setLikePopupVisible(true);
+      fetchLikeNames();
+    }, 500); // To prevent too much api calls by flickering the mouse over the button I set the timeout to 500 ms.
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeoutRef.current);
+    setLikePopupVisible(false);
+  };
+
   return (
     <div className="post">
       <div>
@@ -103,6 +183,26 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
             <button onClick={handleDelete}>Delete</button>
           </div>
         ) : null}
+      </div>
+      <div className="post-actions">
+        <div className="like-container">
+          <button
+            onClick={handleToggleLike}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {likes.includes(currentUser?.uid) ? "Liked" : "Like"} ({likeCount})
+          </button>
+          <div className={`like-popup ${likePopupVisible ? "visible" : ""}`}>
+            People who liked this post: <br />
+            {likeNames.length > 0 ? likeNames.join(", ") : "No likes yet"}
+          </div>
+        </div>
+        {currentUser && (
+          <button onClick={handleToggleBookmark}>
+            {isBookmarked ? "Saved" : "Save"}
+          </button>
+        )}
       </div>
       {comments.length > 0 && (
         <div className="comments">

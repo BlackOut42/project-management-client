@@ -1,0 +1,65 @@
+/* PostForm.css */
+
+.PostForm-container {
+  display: block;
+  width: 100%; /* or another value that fits your layout */
+}
+
+/* Form styles for the post form */
+.PostForm-form {
+  max-width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center form content */
+  display: none; /* Initially hidden */
+}
+
+.PostForm-form.visible {
+  display: block; /* Show form when visible class is added */
+}
+
+.PostForm-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.PostForm-input,
+.PostForm-textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px; /* Space between inputs */
+}
+
+.PostForm-textarea {
+  height: 100px; /* Adjust height as needed */
+  resize: none; /* Prevent resizing */
+  overflow-y: auto; /* Ensure scrollbar appears if content exceeds height */
+}
+
+.PostForm-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.PostForm-button:hover {
+  background-color: #0056b3;
+}
+
+.PostForm-error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
