@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
 }
 
 .modal-content {
@@ -16,8 +17,14 @@
   border-radius: 8px;
   max-width: 500px;
   width: 100%;
-  position: relative;
+  max-height: 80vh; /* Set max-height to allow scrolling if content is too large */
+  overflow-y: auto; /* Enable vertical scrolling */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-sizing: border-box; /* Ensure padding is included in the width */
+  z-index: 1000; /* Ensure modal content is above overlay */
 }
 
 .modal-close {
@@ -43,4 +50,19 @@
 .modal-textarea {
   resize: none; /* Make textarea non-resizable */
   height: 100px; /* Set a fixed height */
+}
+
+.modal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.modal-button:hover {
+  background-color: #0056b3;
 }

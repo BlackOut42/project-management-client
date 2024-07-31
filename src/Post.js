@@ -5,7 +5,13 @@ import Modal from "./Modal";
 import { AuthContext } from "./authContext";
 import "./styles/Post.css";
 
-const Post = ({ post, currentUser, token, onPostUpdated }) => {
+const Post = ({
+  post,
+  currentUser,
+  token,
+  onPostUpdated,
+  isOriginal = false,
+}) => {
   const { authData } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(post.title);
@@ -18,6 +24,10 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
   const [likeNames, setLikeNames] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isSharing, setIsSharing] = useState(false);
+  const [showOriginalPost, setShowOriginalPost] = useState(false);
+  const [originalPost, setOriginalPost] = useState(null);
+  const [message, setMessage] = useState(null); // State for messages
   const hoverTimeoutRef = useRef(null); // Use ref to keep track of the timeout
 
   useEffect(() => {
@@ -28,6 +38,14 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
       setIsFollowing(currentUser.following.includes(post.uid));
     }
   }, [currentUser, post.id, post.uid]);
+
+  useEffect(() => {
+    if (showOriginalPost) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showOriginalPost]);
 
   const handleCommentChange = (e) => {
     setCommentBody(e.target.value);
@@ -61,8 +79,10 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
         },
       ]);
       setCommentBody("");
+      setMessage("Comment added successfully.");
     } catch (error) {
       console.error("Error adding comment:", error);
+      setMessage("Error adding comment.");
     }
   };
 
@@ -83,15 +103,17 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
 
       onPostUpdated(response.data.updatedPost); // Update the post list with the updated post
       setIsEditing(false);
+      setMessage("Post edited successfully.");
     } catch (error) {
       console.error("Error editing post:", error);
+      setMessage("Error editing post.");
     }
   };
 
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `http://project-management-server-4av5.onrender.com/delete-post/${post.id}`,
+        `https://project-management-server-4av5.onrender.com/delete-post/${post.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,8 +122,10 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
       );
 
       onPostUpdated(null, post.id); // Remove the deleted post from the list
+      setMessage("");
     } catch (error) {
       console.error("Error deleting post:", error);
+      setMessage("Error deleting post.");
     }
   };
 
@@ -125,8 +149,10 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
         setLikes([...likes, currentUser.uid]);
         setLikeCount(likeCount + 1);
       }
+      setMessage("");
     } catch (error) {
       console.error("Error toggling like:", error);
+      setMessage("Error toggling like.");
     }
   };
 
@@ -144,8 +170,10 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
       );
 
       setIsBookmarked(!isBookmarked);
+      setMessage("");
     } catch (error) {
       console.error("Error toggling bookmark:", error);
+      setMessage("Error toggling bookmark.");
     }
   };
 
@@ -163,27 +191,68 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
       );
 
       setIsFollowing(response.data.following);
+      setMessage("");
     } catch (error) {
       console.error("Error toggling follow:", error);
+      setMessage("Error toggling follow.");
     }
   };
 
-  const fetchLikeNames = async () => {
+  const handleShare = async () => {
+    if (!currentUser) return; // Ensure currentUser is defined
+    try {
+      const response = await axios.post(
+        `https://project-management-server-4av5.onrender.com/share-post/${
+          post.originalPostId || post.id
+        }`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            user: JSON.stringify(currentUser),
+          },
+        }
+      );
+
+      onPostUpdated(response.data.sharedPostId); // Update the post list with the shared post
+      setIsSharing(false);
+      setMessage("Post shared successfully.");
+    } catch (error) {
+      console.error("Error sharing post:", error);
+      setMessage("Error sharing post.");
+    }
+  };
+
+  const fetchOriginalPost = async () => {
     try {
       const response = await axios.get(
-        `https://project-management-server-4av5.onrender.com/post-likes/${post.id}`
+        `https://project-management-server-4av5.onrender.com/posts/${post.originalPostId}`
+      );
+      setOriginalPost(response.data);
+      setShowOriginalPost(true);
+    } catch (error) {
+      console.error("Error fetching original post:", error);
+      setMessage("Error fetching original post.");
+    }
+  };
+
+  const fetchLikeNames = async (postId) => {
+    try {
+      const response = await axios.get(
+        `https://project-management-server-4av5.onrender.com/post-likes/${postId}`
       );
 
       setLikeNames(response.data.likes);
     } catch (error) {
       console.error("Error fetching like names:", error);
+      setMessage("Error fetching like names.");
     }
   };
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (postId) => {
     hoverTimeoutRef.current = setTimeout(() => {
       setLikePopupVisible(true);
-      fetchLikeNames();
+      fetchLikeNames(postId);
     }, 500); // To prevent too much api calls by flickering the mouse over the button I set the timeout to 500 ms.
   };
 
@@ -194,7 +263,16 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
 
   return (
     <div className="post">
+      {message && <div className="message">{message}</div>}
       <div>
+        {post.sharedBy && (
+          <div className="shared-header">
+            {post.sharedBy} has shared{" "}
+            <span onClick={fetchOriginalPost} className="original-post-link">
+              {post.author}'s post
+            </span>
+          </div>
+        )}
         <h2>{post.title}</h2>
         <p>{post.body}</p>
         <small>
@@ -205,12 +283,21 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
             </button>
           )}
         </small>
-        {authData?.user?.uid === post.uid || authData?.user?.isAdmin ? (
+        {(authData?.user?.uid === post.uid ||
+          authData?.user?.isAdmin ||
+          (post.sharedByUid === currentUser?.uid && post.sharedBy)) && (
           <div>
-            <button onClick={() => setIsEditing(true)}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+            {!post.sharedBy &&
+              (authData?.user?.uid === post.uid || authData?.user?.isAdmin) && (
+                <button onClick={() => setIsEditing(true)}>Edit</button>
+              )}
+            {(authData?.user?.uid === post.uid ||
+              authData?.user?.isAdmin ||
+              post.sharedByUid === currentUser?.uid) && (
+              <button onClick={handleDelete}>Delete</button>
+            )}
           </div>
-        ) : null}
+        )}
       </div>
       <div className="post-actions">
         <div
@@ -218,8 +305,8 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
           style={{ position: "relative", display: "inline-block" }}
         >
           <button
-            onClick={handleToggleLike}
-            onMouseEnter={handleMouseEnter}
+            onClick={() => handleToggleLike(post.id)}
+            onMouseEnter={() => handleMouseEnter(post.id)}
             onMouseLeave={handleMouseLeave}
           >
             {likes.includes(currentUser?.uid) ? "Liked" : "Like"} ({likeCount})
@@ -230,9 +317,14 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
           </div>
         </div>
         {currentUser && (
-          <button onClick={handleToggleBookmark} className="bookmark-button">
-            {isBookmarked ? "Saved" : "Save"}
-          </button>
+          <>
+            <button onClick={handleToggleBookmark} className="bookmark-button">
+              {isBookmarked ? "Saved" : "Save"}
+            </button>
+            <button onClick={() => setIsSharing(true)} className="share-button">
+              Share
+            </button>
+          </>
         )}
       </div>
       {comments.length > 0 && (
@@ -273,6 +365,32 @@ const Post = ({ post, currentUser, token, onPostUpdated }) => {
         />
         <button onClick={handleEdit}>Save</button>
         <button onClick={() => setIsEditing(false)}>Cancel</button>
+      </Modal>
+      <Modal isVisible={isSharing} onClose={() => setIsSharing(false)}>
+        <h2>Share Post</h2>
+        <p>Are you sure you want to share this post?</p>
+        <button onClick={handleShare} className="modal-button">
+          Share
+        </button>
+        <button onClick={() => setIsSharing(false)} className="modal-button">
+          Cancel
+        </button>
+      </Modal>
+      <Modal
+        isVisible={showOriginalPost}
+        onClose={() => setShowOriginalPost(false)}
+      >
+        {originalPost ? (
+          <Post
+            post={{ ...originalPost, id: originalPost.id }}
+            currentUser={currentUser}
+            token={token}
+            onPostUpdated={onPostUpdated}
+            isOriginal={true}
+          />
+        ) : (
+          <p>Loading...</p>
+        )}
       </Modal>
     </div>
   );

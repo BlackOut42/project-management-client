@@ -122,3 +122,55 @@
 .follow-button:hover {
   background-color: #0056b3;
 }
+.shared-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.post-actions .share-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.post-actions .share-button:hover {
+  background-color: #218838;
+}
+
+.original-post-link {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.original-post-link:hover {
+  text-decoration: underline;
+}
+
+.modal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.modal-button:hover {
+  background-color: #0056b3;
+}
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: white;
+  background-color: #007bff;
+}
