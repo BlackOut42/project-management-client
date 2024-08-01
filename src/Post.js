@@ -4,6 +4,7 @@ import Comment from "./Comment";
 import Modal from "./Modal";
 import { AuthContext } from "./authContext";
 import "./styles/Post.css";
+import "./styles/RepostModal.css";
 
 const Post = ({
   post,
@@ -12,7 +13,7 @@ const Post = ({
   onPostUpdated,
   isOriginal = false,
 }) => {
-  const { authData } = useContext(AuthContext);
+  const { authData, fetchUserData } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(post.title);
   const [editedBody, setEditedBody] = useState(post.body);
@@ -25,6 +26,9 @@ const Post = ({
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isSharing, setIsSharing] = useState(false);
+  const [isReposting, setIsReposting] = useState(false);
+  const [repostTitle, setRepostTitle] = useState(post.title);
+  const [repostBody, setRepostBody] = useState(post.body);
   const [showOriginalPost, setShowOriginalPost] = useState(false);
   const [originalPost, setOriginalPost] = useState(null);
   const [message, setMessage] = useState(null); // State for messages
@@ -149,6 +153,7 @@ const Post = ({
         setLikes([...likes, currentUser.uid]);
         setLikeCount(likeCount + 1);
       }
+      fetchUserData(); // Fetch updated user data
       setMessage("");
     } catch (error) {
       console.error("Error toggling like:", error);
@@ -170,6 +175,7 @@ const Post = ({
       );
 
       setIsBookmarked(!isBookmarked);
+      fetchUserData(); // Fetch updated user data
       setMessage("");
     } catch (error) {
       console.error("Error toggling bookmark:", error);
@@ -190,7 +196,8 @@ const Post = ({
         }
       );
 
-      setIsFollowing(response.data.following);
+      setIsFollowing((prevState) => !prevState);
+      fetchUserData(); // Fetch updated user data
       setMessage("");
     } catch (error) {
       console.error("Error toggling follow:", error);
@@ -253,12 +260,48 @@ const Post = ({
     hoverTimeoutRef.current = setTimeout(() => {
       setLikePopupVisible(true);
       fetchLikeNames(postId);
-    }, 500); // To prevent too much api calls by flickering the mouse over the button I set the timeout to 500 ms.
+    }, 500); // To prevent too many API calls by flickering the mouse over the button I set the timeout to 500 ms.
   };
 
   const handleMouseLeave = () => {
     clearTimeout(hoverTimeoutRef.current);
     setLikePopupVisible(false);
+  };
+
+  const handlePostReposted = (repostId) => {
+    onPostUpdated({ ...post, id: repostId }); // Update the post list with the reposted post
+    setIsReposting(false);
+  };
+
+  const handleRepost = async (e) => {
+    e.preventDefault();
+
+    if (!repostTitle || !repostBody) {
+      setMessage("Title and body are required");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `https://project-management-server-4av5.onrender.com/repost/${
+          post.originalPostId || post.id
+        }`,
+        { title: repostTitle, body: repostBody },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            user: JSON.stringify(currentUser),
+          },
+        }
+      );
+
+      onPostUpdated(response.data.repostId); // Update the post list with the repost
+      setIsReposting(false);
+      setMessage("Post reposted successfully.");
+    } catch (error) {
+      console.error("Error reposting post:", error);
+      setMessage("Error reposting post.");
+    }
   };
 
   return (
@@ -273,28 +316,50 @@ const Post = ({
             </span>
           </div>
         )}
+        {post.repostedBy && (
+          <div className="shared-header">
+            {post.repostedBy} has reposted{" "}
+            <span onClick={fetchOriginalPost} className="original-post-link">
+              {post.author}'s post
+            </span>
+          </div>
+        )}
         <h2>{post.title}</h2>
         <p>{post.body}</p>
         <small>
           Author: <i>{post.author}</i>
-          {currentUser && currentUser.uid !== post.uid && (
-            <button onClick={handleToggleFollow} className="follow-button">
-              {isFollowing ? "Unfollow" : "Follow"}
-            </button>
-          )}
+          {currentUser &&
+            currentUser.uid !== post.uid &&
+            currentUser.uid !== post.sharedByUid &&
+            currentUser.uid !== post.repostedByUid &&
+            !authData?.user?.isAdmin && (
+              <button onClick={handleToggleFollow} className="follow-button">
+                {isFollowing ? "Unfollow" : "Follow"}
+              </button>
+            )}
         </small>
-        {(authData?.user?.uid === post.uid ||
-          authData?.user?.isAdmin ||
-          (post.sharedByUid === currentUser?.uid && post.sharedBy)) && (
+        {currentUser && (
           <div>
-            {!post.sharedBy &&
-              (authData?.user?.uid === post.uid || authData?.user?.isAdmin) && (
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-              )}
             {(authData?.user?.uid === post.uid ||
               authData?.user?.isAdmin ||
-              post.sharedByUid === currentUser?.uid) && (
-              <button onClick={handleDelete}>Delete</button>
+              post.sharedByUid === currentUser?.uid ||
+              post.repostedByUid === currentUser?.uid) && (
+              <>
+                {post.sharedBy ? (
+                  authData?.user?.uid === post.sharedByUid && (
+                    <button onClick={handleDelete}>Delete</button>
+                  )
+                ) : (
+                  <>
+                    {(authData?.user?.uid === post.uid ||
+                      authData?.user?.isAdmin ||
+                      post.repostedByUid === currentUser?.uid) && (
+                      <button onClick={() => setIsEditing(true)}>Edit</button>
+                    )}
+                    <button onClick={handleDelete}>Delete</button>
+                  </>
+                )}
+              </>
             )}
           </div>
         )}
@@ -321,9 +386,22 @@ const Post = ({
             <button onClick={handleToggleBookmark} className="bookmark-button">
               {isBookmarked ? "Saved" : "Save"}
             </button>
-            <button onClick={() => setIsSharing(true)} className="share-button">
-              Share
-            </button>
+            {!post.repostedBy && (
+              <>
+                <button
+                  onClick={() => setIsSharing(true)}
+                  className="share-button"
+                >
+                  Share
+                </button>
+                <button
+                  onClick={() => setIsReposting(true)}
+                  className="repost-button"
+                >
+                  Repost
+                </button>
+              </>
+            )}
           </>
         )}
       </div>
@@ -391,6 +469,42 @@ const Post = ({
         ) : (
           <p>Loading...</p>
         )}
+      </Modal>
+      <Modal isVisible={isReposting} onClose={() => setIsReposting(false)}>
+        <h2>Repost</h2>
+        <form onSubmit={handleRepost}>
+          <label>
+            Title:
+            <input
+              type="text"
+              value={repostTitle}
+              onChange={(e) => setRepostTitle(e.target.value)}
+              className="RepostModal-input"
+              required
+              maxLength="255"
+            />
+          </label>
+          <label>
+            Body:
+            <textarea
+              value={repostBody}
+              onChange={(e) => setRepostBody(e.target.value)}
+              className="RepostModal-textarea"
+              required
+              maxLength="255"
+            />
+          </label>
+          <button type="submit" className="RepostModal-button">
+            Repost
+          </button>
+          <button
+            type="button"
+            className="RepostModal-button"
+            onClick={() => setIsReposting(false)}
+          >
+            Cancel
+          </button>
+        </form>
       </Modal>
     </div>
   );
