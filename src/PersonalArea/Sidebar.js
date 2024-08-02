@@ -8,6 +8,9 @@ const Sidebar = ({ onSelectPanel }) => {
       <ul>
         <li onClick={() => onSelectPanel("details")}>Your Details</li>
         <li onClick={() => onSelectPanel("password")}>Change Password</li>
+        <li onClick={() => onSelectPanel("myPosts")}>My Posts</li>
+        <li onClick={() => onSelectPanel("likedPosts")}>Liked Posts</li>
+        <li onClick={() => onSelectPanel("statistics")}>Statistics</li>
         <li onClick={() => onSelectPanel("delete")}>Delete Account</li>
       </ul>
     </div>
