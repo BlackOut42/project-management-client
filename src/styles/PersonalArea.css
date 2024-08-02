@@ -1,7 +1,74 @@
 /* PersonalArea.css */
 .personalarea-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
   padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.sidebar ul li:hover {
+  text-decoration: underline;
+}
+
+.panel-container {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.details-section,
+.password-section,
+.delete-section {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.details-section h3,
+.password-section h3,
+.delete-section h3 {
+  margin-bottom: 10px;
+}
+
+.details-section p {
+  margin: 5px 0;
+}
+
+.password-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-section label {
+  margin-bottom: 10px;
+}
+
+.password-section button {
+  align-self: flex-start;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a;
 }
