@@ -7,6 +7,7 @@ const Sidebar = ({ onSelectPanel }) => {
     <div className="sidebar">
       <ul>
         <li onClick={() => onSelectPanel("details")}>Your Details</li>
+        <li onClick={() => onSelectPanel("password")}>Change Password</li>
       </ul>
     </div>
   );

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Sidebar from "./PersonalArea/Sidebar";
 import UserDetails from "./PersonalArea/UserDetails";
+import ChangePassword from "./PersonalArea/ChangePassword";
 import "./styles/PersonalArea.css";
 
 const PersonalArea = () => {
@@ -11,6 +12,8 @@ const PersonalArea = () => {
     switch (selectedPanel) {
       case "details":
         return <UserDetails />;
+      case "password":
+        return <ChangePassword />;
       default:
         return <UserDetails />;
     }
