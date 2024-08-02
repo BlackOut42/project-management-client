@@ -187,7 +187,9 @@ const Post = ({
     if (!currentUser) return; // Ensure currentUser is defined
     try {
       const response = await axios.post(
-        `https://project-management-server-4av5.onrender.com/toggle-follow/${post.uid}`,
+        `https://project-management-server-4av5.onrender.com/toggle-follow/${
+          post.repostedByUid || post.uid
+        }`,
         {},
         {
           headers: {
