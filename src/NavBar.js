@@ -19,6 +19,11 @@ const NavBar = () => {
             About
           </Link>
         </li>
+        <li className="navbar-item">
+          <Link to="/personalarea" className="navbar-link">
+            Personal Area
+          </Link>
+        </li>
         {authData ? (
           <li className="navbar-item">
             <button onClick={logout} className="navbar-link">

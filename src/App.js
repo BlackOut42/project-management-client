@@ -6,6 +6,7 @@ import Homepage from "./Homepage";
 import About from "./About";
 import Login from "./Login";
 import Register from "./Register";
+import PersonalArea from "./PersonalArea";
 import PingAlertComponent from "./pingAlertComponent";
 import "./styles/App.css";
 
@@ -23,6 +24,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/personalarea" element={<PersonalArea />} />
             </Routes>
           </div>
         </div>
