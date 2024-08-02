@@ -8,6 +8,7 @@ const Sidebar = ({ onSelectPanel }) => {
       <ul>
         <li onClick={() => onSelectPanel("details")}>Your Details</li>
         <li onClick={() => onSelectPanel("password")}>Change Password</li>
+        <li onClick={() => onSelectPanel("delete")}>Delete Account</li>
       </ul>
     </div>
   );

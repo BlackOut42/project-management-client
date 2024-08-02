@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Sidebar from "./PersonalArea/Sidebar";
 import UserDetails from "./PersonalArea/UserDetails";
 import ChangePassword from "./PersonalArea/ChangePassword";
+import DeleteAccount from "./PersonalArea/DeleteAccount";
 import "./styles/PersonalArea.css";
 
 const PersonalArea = () => {
@@ -14,6 +15,8 @@ const PersonalArea = () => {
         return <UserDetails />;
       case "password":
         return <ChangePassword />;
+      case "delete":
+        return <DeleteAccount />;
       default:
         return <UserDetails />;
     }
