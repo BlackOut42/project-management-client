@@ -1,17 +1,24 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+
+[theme="light"] {
+  --navbar-text-color: #ffffff;
+  --nav-background-color: #007bff;
+}
+
+[theme="dark"] {
+  --navbar-text-color: #ffffff;
+  --nav-background-color: #036cdc;
 }
 
 /* Global styles for Navbar */
 .navbar {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
+  background-color: var(--nav-background-color);
+  color: var(--navbar-text-color);
+  padding: 20px 20px;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.3);
 }
 
 .navbar ul {
+  color: var(--navbar-text-color);
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -21,22 +28,23 @@ body {
 }
 
 .navbar ul li {
+  color: var(--navbar-text-color);
   display: inline;
   margin-right: 15px;
 }
 
 .navbar ul li a {
-  color: white;
+  color: var(--navbar-text-color);
   text-decoration: none;
   padding: 10px 15px;
 }
 
 .navbar ul li a:hover {
+  color: var(--navbar-text-color);
   background-color: #0056b3;
 }
 
 .navbar ul li button {
-  color: white;
   text-decoration: none;
   background: none;
   border: none;

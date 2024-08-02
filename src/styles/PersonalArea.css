@@ -1,13 +1,28 @@
 /* PersonalArea.css */
+
+[theme="light"] {
+  --sidebar-text-color: #000000;
+  --sidebar-background-color: #5dabff;
+  --delete-button-color: #bc0000;
+  --delete-button-color-hover: #9e0000;
+}
+
+[theme="dark"] {
+  --sidebar-text-color: #ffffff;
+  --sidebar-background-color: #0f2845;
+  --delete-button-color: #9e0000;
+  --delete-button-color-hover: #bc0000;
+}
+
 .personalarea-container {
   display: flex;
 }
 
 .sidebar {
   width: 200px;
-  background-color: #f4f4f4;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  background-color: var(--sidebar-background-color);
 }
 
 .sidebar ul {
@@ -18,7 +33,7 @@
 .sidebar ul li {
   margin: 10px 0;
   cursor: pointer;
-  color: #007bff;
+  color: var(--sidebar-text-color);
 }
 
 .sidebar ul li:hover {
@@ -79,7 +94,7 @@
 }
 
 .delete-button {
-  background-color: #ff4d4d;
+  background-color: var(--delete-button-color);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -87,7 +102,7 @@
 }
 
 .delete-button:hover {
-  background-color: #ff1a1a;
+  background-color: var(--delete-button-color-hover);
 }
 
 /* Error message styling */

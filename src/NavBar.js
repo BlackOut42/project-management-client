@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./authContext";
+import ThemeSwitcher from "./ThemeSwitcher";
 import "./styles/Navbar.css";
+import "./styles/ToggleSwitch.css";
 
 const NavBar = () => {
   const { authData, logout } = useContext(AuthContext);
@@ -13,6 +15,9 @@ const NavBar = () => {
           <Link to="/" className="navbar-link">
             Homepage
           </Link>
+        </li>
+        <li className="navbar-item">
+          <ThemeSwitcher/>
         </li>
         <li className="navbar-item">
           <Link to="/about" className="navbar-link">

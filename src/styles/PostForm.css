@@ -1,5 +1,17 @@
 /* PostForm.css */
 
+[theme="light"] {
+  --postform-border-color: #000000;
+  --postform-background-color: var(--background-color);
+  --postform-textarea-background-color: #e9e9e9;
+}
+
+[theme="dark"] {
+  --postform-border-color: #ffffff;
+  --postform-background-color: var(--background-color);
+  --postform-textarea-background-color: #909090;
+}
+
 .PostForm-container {
   display: block;
   width: 100%; /* or another value that fits your layout */
@@ -9,9 +21,9 @@
 .PostForm-form {
   max-width: 300px;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--postform-border-color);
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--postform-background-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center; /* Center form content */
   display: none; /* Initially hidden */
@@ -31,16 +43,18 @@
   width: 100%;
   padding: 8px;
   font-size: 1em;
-  border: 1px solid #ccc;
+  border: 1px solid var(--postform-border-color);
   border-radius: 4px;
   box-sizing: border-box;
   margin-bottom: 10px; /* Space between inputs */
+  background-color: var(--postform-textarea-background-color);
 }
 
 .PostForm-textarea {
   height: 100px; /* Adjust height as needed */
   resize: none; /* Prevent resizing */
   overflow-y: auto; /* Ensure scrollbar appears if content exceeds height */
+  background-color: var(--postform-textarea-background-color);
 }
 
 .PostForm-button {
