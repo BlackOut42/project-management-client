@@ -1,15 +1,26 @@
-import React, { useContext } from "react";
-import { AuthContext } from "./authContext";
+// /src/PersonalArea.js
+import React, { useState } from "react";
+import Sidebar from "./PersonalArea/Sidebar";
+import UserDetails from "./PersonalArea/UserDetails";
 import "./styles/PersonalArea.css";
 
 const PersonalArea = () => {
-  const { authData } = useContext(AuthContext);
-  const user = authData?.user;
+  const [selectedPanel, setSelectedPanel] = useState("details");
+
+  const renderPanel = () => {
+    switch (selectedPanel) {
+      case "details":
+        return <UserDetails />;
+      default:
+        return <UserDetails />;
+    }
+  };
 
   return (
     <div className="personalarea-container">
-      <div className="greeting-section">
-        <h2>Personal Area</h2>
+      <Sidebar onSelectPanel={setSelectedPanel} />
+      <div className="panel-container">
+        {renderPanel()}
       </div>
     </div>
   );
