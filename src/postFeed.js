@@ -19,11 +19,24 @@ const PostFeed = () => {
       const response = await axios.get(
         "https://project-management-server-4av5.onrender.com/posts",
         {
-          params: { lastVisible },
+          params: { lastVisible, limit: 10 },
         }
       );
 
-      const newPosts = response.data.posts;
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      const newPosts = response.data.posts.filter((post) => {
+        if (post.sharedByUid) {
+          return (
+            user?.uid === post.sharedByUid ||
+            user?.uid === post.uid ||
+            (user?.following &&
+              user?.following?.map(String).includes(String(post.sharedByUid)))
+          );
+        }
+        return true;
+      });
+
       const newLastVisible = response.data.lastVisible;
 
       setPosts((prevPosts) => {
@@ -72,8 +85,8 @@ const PostFeed = () => {
         <Post
           key={post.id}
           post={post}
-          currentUser={authData?.user}
-          token={authData?.token}
+          currentUser={JSON.parse(localStorage.getItem("user"))}
+          token={localStorage.getItem("token")}
           onPostUpdated={handlePostUpdated}
         />
       ))}
