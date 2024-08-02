@@ -39,7 +39,8 @@ const Post = ({
       setIsBookmarked(currentUser.bookmarks.includes(post.id));
     }
     if (currentUser && currentUser.following) {
-      setIsFollowing(currentUser.following.includes(post.uid));
+      setIsFollowing(currentUser.following.includes(post.uid)) ||
+        currentUser.following.includes(post.uid);
     }
   }, [currentUser, post.id, post.uid]);
 
