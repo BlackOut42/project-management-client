@@ -8,6 +8,8 @@ import DeleteAccount from "./PersonalArea/DeleteAccount";
 import LikedPosts from "./PersonalArea/LikedPosts";
 import MyPosts from "./PersonalArea/MyPosts";
 import Statistics from "./PersonalArea/Statistics";
+import SavedPosts from "./PersonalArea/SavedPosts";
+import FollowedUsers from "./PersonalArea/FollowedUsers";
 import "./styles/PersonalArea.css";
 
 const PersonalArea = () => {
@@ -28,6 +30,10 @@ const PersonalArea = () => {
         return <MyPosts />;
       case "statistics":
         return <Statistics />;
+      case "savedPosts":
+        return <SavedPosts />;
+      case "followedUsers":
+        return <FollowedUsers />;
       default:
         return <UserDetails />;
     }

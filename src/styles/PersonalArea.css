@@ -35,6 +35,8 @@
 .delete-section,
 .liked-posts-section,
 .my-posts-section,
+.saved-posts-section,
+.followed-users-section,
 .statistics-section {
   width: 100%;
   max-width: 400px;
@@ -46,6 +48,8 @@
 .delete-section h3,
 .liked-posts-section h3,
 .my-posts-section h3,
+.saved-posts-section h3,
+.followed-users-section h3,
 .statistics-section h3 {
   margin-bottom: 10px;
 }
@@ -55,6 +59,8 @@
 .delete-section p,
 .liked-posts-section p,
 .my-posts-section p,
+.saved-posts-section p,
+.followed-users-section p,
 .statistics-section p {
   margin: 5px 0;
 }
