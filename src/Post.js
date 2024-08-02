@@ -327,7 +327,7 @@ const Post = ({
         <h2>{post.title}</h2>
         <p>{post.body}</p>
         <small>
-          Author: <i>{post.author}</i>
+          Author: <i>{post.repostedBy || post.author}</i>
           {currentUser &&
             currentUser.uid !== post.uid &&
             currentUser.uid !== post.sharedByUid &&
