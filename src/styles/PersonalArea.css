@@ -1,0 +1,102 @@
+/* PersonalArea.css */
+.personalarea-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.sidebar ul li:hover {
+  text-decoration: underline;
+}
+
+.panel-container {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.details-section,
+.password-section,
+.delete-section,
+.liked-posts-section,
+.my-posts-section,
+.saved-posts-section,
+.followed-users-section,
+.statistics-section {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.details-section h3,
+.password-section h3,
+.delete-section h3,
+.liked-posts-section h3,
+.my-posts-section h3,
+.saved-posts-section h3,
+.followed-users-section h3,
+.statistics-section h3 {
+  margin-bottom: 10px;
+}
+
+.details-section p,
+.password-section p,
+.delete-section p,
+.liked-posts-section p,
+.my-posts-section p,
+.saved-posts-section p,
+.followed-users-section p,
+.statistics-section p {
+  margin: 5px 0;
+}
+
+.password-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-section label {
+  margin-bottom: 10px;
+}
+
+.password-section button {
+  align-self: flex-start;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a;
+}
+
+/* Error message styling */
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  font-size: 1.5em;
+  color: #ff4d4d;
+}
