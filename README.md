@@ -1,5 +1,8 @@
 # `Project Management Client`
 
+## Link to the website
+Click to visit [FoodieFriends](https://foodiefriends.onrender.com/)
+
 ## To Run The project
 1. Clone the repository
 2. Run `npm install` to install all dependencies
