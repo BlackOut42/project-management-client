@@ -44,44 +44,51 @@ const UserDetails = ({ userData }) => {
 
   return (
     <div className="details-section">
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", alignItems: "center" }}
-      >
-        <label>
-          <strong>Name:</strong>
+      {!userData ? (
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <label>
+            <strong>Name:</strong>
+            {isEditing ? (
+              <input
+                type="text"
+                value={firstName}
+                onChange={handleNameChange}
+                required
+                style={{ marginLeft: "10px" }}
+              />
+            ) : (
+              <span style={{ marginLeft: "10px" }}>{firstName}</span>
+            )}
+          </label>
           {isEditing ? (
-            <input
-              type="text"
-              value={firstName}
-              onChange={handleNameChange}
-              required
-              style={{ marginLeft: "10px" }}
-            />
+            <button type="submit" style={{ marginLeft: "10px" }}>
+              Save
+            </button>
           ) : (
-            <span style={{ marginLeft: "10px" }}>{firstName}</span>
+            <button
+              type="button"
+              onClick={handleEditToggle}
+              style={{
+                fontSize: "12px",
+                padding: "2px 6px",
+                marginLeft: "10px",
+                cursor: "pointer",
+                border: "none",
+              }}
+            >
+              🖉
+            </button>
           )}
-        </label>
-        {isEditing ? (
-          <button type="submit" style={{ marginLeft: "10px" }}>
-            Save
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={handleEditToggle}
-            style={{
-              fontSize: "12px",
-              padding: "2px 6px",
-              marginLeft: "10px",
-              cursor: "pointer",
-              border: "none",
-            }}
-          >
-            🖉
-          </button>
-        )}
-      </form>
+        </form>
+      ) : (
+        <p>
+          <strong>Name:</strong> {user?.firstName}
+        </p>
+      )}
+
       <p>
         <strong>Email:</strong> {user?.email}
       </p>
