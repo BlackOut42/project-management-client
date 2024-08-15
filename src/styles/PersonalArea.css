@@ -2,12 +2,15 @@
 .personalarea-container {
   display: flex;
 }
+.panel-container h3 {
+  text-align: center;
+}
 
 .sidebar {
   width: 200px;
   background-color: #f4f4f4;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar ul {
@@ -26,7 +29,10 @@
 }
 
 .panel-container {
+  display: flex;
   flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
@@ -99,4 +105,10 @@
   text-align: center;
   font-size: 1.5em;
   color: #ff4d4d;
+}
+
+.post-feed-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
 }

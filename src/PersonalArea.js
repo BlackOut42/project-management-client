@@ -11,7 +11,6 @@ import Statistics from "./PersonalArea/Statistics";
 import SavedPosts from "./PersonalArea/SavedPosts";
 import FollowedUsers from "./PersonalArea/FollowedUsers";
 import "./styles/PersonalArea.css";
-
 const PersonalArea = () => {
   const { authData } = useContext(AuthContext);
   const [selectedPanel, setSelectedPanel] = useState("details");
@@ -43,15 +42,15 @@ const PersonalArea = () => {
     return (
       <div className="personalarea-container">
         <Sidebar onSelectPanel={setSelectedPanel} />
-        <div className="panel-container">
-          {renderPanel()}
-        </div>
+        <div className="panel-container">{renderPanel()}</div>
       </div>
     );
-  }
-  else {
+  } else {
     return (
-      <div className="error-message">You are unauthorized to view this page, please log into an existing account.</div>
+      <div className="error-message">
+        You are unauthorized to view this page, please log into an existing
+        account.
+      </div>
     );
   }
 };

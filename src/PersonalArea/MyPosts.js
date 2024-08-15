@@ -1,12 +1,21 @@
 // /src/PersonalArea/MyPosts.js
 import React from "react";
+import PersonalFeed from "./PersonalFeed";
 import "../styles/PersonalArea.css";
 
-const MyPosts = () => {
+const MyPosts = ({ userData }) => {
+  const user = userData || JSON.parse(localStorage.getItem("user"));
+
   return (
-    <div className="my-posts-section">
-      <h3>My Posts</h3>
-      <p>List of your posts will appear here.</p>
+    <div className="saved-posts-section post-feed-section">
+      <h3>{userData ? `${user.firstName}'s Posts` : "My Posts"}</h3>
+      {user ? (
+        <PersonalFeed
+          fetchRoute={`https://project-management-server-4av5.onrender.com/user-posts/${user.uid}`}
+        />
+      ) : (
+        <p>User is not logged in</p>
+      )}
     </div>
   );
 };

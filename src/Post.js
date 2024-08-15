@@ -39,8 +39,11 @@ const Post = ({
       setIsBookmarked(currentUser.bookmarks.includes(post.id));
     }
     if (currentUser && currentUser.following) {
-      setIsFollowing(currentUser.following.includes(post.repostedByUid)) ||
-        currentUser.following.includes(post.uid);
+      setIsFollowing(
+        currentUser.following.includes(post.repostedByUid) ||
+          currentUser.following.includes(post.sharedByUid) ||
+          currentUser.following.includes(post.uid)
+      );
     }
   }, [currentUser, post.id, post.uid]);
 
@@ -118,7 +121,7 @@ const Post = ({
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://project-management-server-4av5.onrender.com/delete-post/${post.id}`,
+        `https://project-management-server-4av5.onrender.com/${post.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -138,7 +141,7 @@ const Post = ({
     if (!currentUser) return; // Ensure currentUser is defined
     try {
       const response = await axios.post(
-        `https://project-management-server-4av5.onrender.com/toggle-like/${post.id}`,
+        `https://project-management-server-4av5.onrender.com/${post.id}`,
         {},
         {
           headers: {
@@ -189,7 +192,7 @@ const Post = ({
     try {
       const response = await axios.post(
         `https://project-management-server-4av5.onrender.com/toggle-follow/${
-          post.repostedByUid || post.uid
+          post.repostedByUid || post.sharedByUid || post.uid
         }`,
         {},
         {
@@ -199,7 +202,7 @@ const Post = ({
         }
       );
 
-      setIsFollowing((prevState) => !prevState);
+      setIsFollowing(response.following);
       fetchUserData(); // Fetch updated user data
       setMessage("");
     } catch (error) {
