@@ -11,12 +11,7 @@ const Homepage = () => {
   return (
     <div className="homepage-container">
       <div className="newpost-section">
-        {user && (
-          <>
-            {/* <h2>{`${user.firstName}, Welcome 😄!`}</h2> */}
-            <PostForm />
-          </>
-        )}
+        {user && (<PostForm />)}
       </div>
       <div className="post-feed-section">
         <PostFeed />
