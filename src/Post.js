@@ -121,14 +121,13 @@ const Post = ({
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://project-management-server-4av5.onrender.com/${post.id}`,
+        `https://project-management-server-4av5.onrender.com/delete-post/${post.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
       onPostUpdated(null, post.id); // Remove the deleted post from the list
       setMessage("");
     } catch (error) {
