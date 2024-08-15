@@ -140,7 +140,7 @@ const Post = ({
     if (!currentUser) return; // Ensure currentUser is defined
     try {
       const response = await axios.post(
-        `https://project-management-server-4av5.onrender.com/${post.id}`,
+        `https://project-management-server-4av5.onrender.com/toggle-like/${post.id}`,
         {},
         {
           headers: {
