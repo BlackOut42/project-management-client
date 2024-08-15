@@ -2,14 +2,14 @@
   --nav-background-color: #eeeeee;
   --navbar-text-color: #6d6d6d;
   --navbar-text-color-hover: #252525;
-  /* --logopic: url("../pics/logo_light.png"); */
+  /* --logopic: url("../logo/logo_light.png"); */
 }
 
 [theme="dark"] {
   --nav-background-color: #393732;
   --navbar-text-color: #ecebe2;
   --navbar-text-color-hover: #ffffff;
-  /* --logopic: url("../pics/logo_dark.png"); */
+  /* --logopic: url("../logo/logo_dark.png"); */
 }
 .header-container {
   width: 100%;

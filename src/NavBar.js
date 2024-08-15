@@ -4,8 +4,8 @@ import { AuthContext } from "./authContext";
 import ThemeSwitcher from "./ThemeSwitcher";
 import "./styles/Navbar.css";
 import "./styles/ToggleSwitch.css";
-import logoLight from "./pics/logo_light.png";
-import logoDark from "./pics/logo_dark.png";
+import logoLight from "./logo/logo_light.png";
+import logoDark from "./logo/logo_dark.png";
 
 const NavBar = () => {
   const { authData, logout } = useContext(AuthContext);
