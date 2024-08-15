@@ -47,10 +47,6 @@ body {
   /*gap: var(--spacing-unit);*/
 }
 
-.panel-container h3 {
-  text-align: center;
-}
-
 .sidebar {
   width: 150px;
   height: 650px;
