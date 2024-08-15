@@ -12,7 +12,6 @@ import Statistics from "./PersonalArea/Statistics";
 import SavedPosts from "./PersonalArea/SavedPosts";
 import FollowedUsers from "./PersonalArea/FollowedUsers";
 import "./styles/PersonalArea.css";
-
 const PersonalArea = () => {
   const { authData } = useContext(AuthContext);
   const [selectedPanel, setSelectedPanel] = useState("details");

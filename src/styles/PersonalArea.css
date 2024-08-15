@@ -47,6 +47,10 @@ body {
   /*gap: var(--spacing-unit);*/
 }
 
+.panel-container h3 {
+  text-align: center;
+}
+
 .sidebar {
   width: 150px;
   height: 650px;
@@ -77,6 +81,7 @@ body {
 }
 
 .panel-container {
+  display: flex;
   flex-grow: 1;
   padding: var(--spacing-unit);
   background-color: var(--background-color-light);
@@ -173,4 +178,16 @@ body {
   font-size: 1.5em;
   color: #ff4d4d;
   padding: var(--spacing-unit);
+}
+
+.post-feed-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+.post-feed-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
 }
