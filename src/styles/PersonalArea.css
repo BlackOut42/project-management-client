@@ -1,28 +1,59 @@
 /* PersonalArea.css */
 
+:root {
+  --primary-light-color: #919191;
+  --primary-dark-color: #00666d;
+  --accent-color: #b0eedc;
+  --danger-color: #e63946;
+  --danger-hover-color: #d62828;
+  --text-color-light: #000000;
+  --text-color-dark: #ecebe2;
+  --background-color-light: #fdfdfd;
+  --background-color-dark: var(--background-color);
+  --box-shadow-color: rgba(0, 0, 0, 0.2);
+  --spacing-unit: 20px;
+  --border-radius: 8px;
+  --font-family: "Roboto", sans-serif;
+}
+
 [theme="light"] {
-  --sidebar-text-color: #000000;
-  --sidebar-background-color: #5dabff;
-  --delete-button-color: #bc0000;
-  --delete-button-color-hover: #9e0000;
+  --sidebar-text-color: var(--text-color-light);
+  --sidebar-background-color: var(--primary-light-color);
+  --delete-button-color: var(--danger-color);
+  --delete-button-color-hover: var(--danger-hover-color);
 }
 
 [theme="dark"] {
-  --sidebar-text-color: #ffffff;
-  --sidebar-background-color: #0f2845;
-  --delete-button-color: #9e0000;
-  --delete-button-color-hover: #bc0000;
+  --sidebar-text-color: var(--text-color-dark);
+  --sidebar-background-color: var(--primary-dark-color);
+  --delete-button-color: var(--danger-hover-color);
+  --delete-button-color-hover: var(--danger-color);
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+[theme="dark"] body {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
 }
 
 .personalarea-container {
   display: flex;
+  /*gap: var(--spacing-unit);*/
 }
 
 .sidebar {
-  width: 200px;
-  padding: 20px;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  width: 150px;
+  height: 650px;
+  padding: var(--spacing-unit);
+  box-shadow: 2px 2px 10px var(--box-shadow-color);
   background-color: var(--sidebar-background-color);
+  border-radius: var(--border-radius);
 }
 
 .sidebar ul {
@@ -31,18 +62,31 @@
 }
 
 .sidebar ul li {
-  margin: 10px 0;
+  margin: var(--spacing-unit) 0;
+  padding: 10px;
   cursor: pointer;
   color: var(--sidebar-text-color);
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s;
 }
 
 .sidebar ul li:hover {
-  text-decoration: underline;
+  background-color: var(--accent-color);
+  color: var(--text-color-dark);
+  text-decoration: none;
 }
 
 .panel-container {
   flex-grow: 1;
-  padding: 20px;
+  padding: var(--spacing-unit);
+  background-color: var(--background-color-light);
+  border-radius: var(--border-radius);
+  box-shadow: 2px 2px 10px var(--box-shadow-color);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+[theme="dark"] .panel-container {
+  background-color: var(--background-color-dark);
 }
 
 .details-section,
@@ -54,8 +98,8 @@
 .followed-users-section,
 .statistics-section {
   width: 100%;
-  max-width: 400px;
-  margin-bottom: 20px;
+  max-width: 500px;
+  margin-bottom: var(--spacing-unit);
 }
 
 .details-section h3,
@@ -67,6 +111,7 @@
 .followed-users-section h3,
 .statistics-section h3 {
   margin-bottom: 10px;
+  font-size: 1.25em;
 }
 
 .details-section p,
@@ -83,14 +128,26 @@
 .password-section form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .password-section label {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .password-section button {
   align-self: flex-start;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s;
+}
+
+.password-section button:hover {
+  background-color: var(--delete-button-color-hover);
 }
 
 .delete-button {
@@ -99,13 +156,14 @@
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s;
 }
 
 .delete-button:hover {
   background-color: var(--delete-button-color-hover);
 }
 
-/* Error message styling */
 .error-message {
   display: flex;
   justify-content: center;
@@ -114,4 +172,5 @@
   text-align: center;
   font-size: 1.5em;
   color: #ff4d4d;
+  padding: var(--spacing-unit);
 }

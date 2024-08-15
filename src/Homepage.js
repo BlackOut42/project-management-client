@@ -10,14 +10,12 @@ const Homepage = () => {
 
   return (
     <div className="homepage-container">
-      <div className="greeting-section">
-        {user ? (
+      <div className="newpost-section">
+        {user && (
           <>
-            <h2>{`${user.firstName}, Welcome 😄!`}</h2>
+            {/* <h2>{`${user.firstName}, Welcome 😄!`}</h2> */}
             <PostForm />
           </>
-        ) : (
-          <h2>Welcome to the Homepage</h2>
         )}
       </div>
       <div className="post-feed-section">

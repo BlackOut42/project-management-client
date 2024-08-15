@@ -33,7 +33,7 @@
 }
 
 .RepostModal-button {
-  background-color: #007bff;
+  background-color: #00666d;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -44,5 +44,5 @@
 }
 
 .RepostModal-button:hover {
-  background-color: #0056b3;
+  background-color: #00666dda;
 }

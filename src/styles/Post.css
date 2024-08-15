@@ -1,34 +1,41 @@
-
 [theme="light"] {
-  --shared-post-header-background-color: #9ccdff;
+  --shared-post-header-background-color: #00666d54;
   --feed-border-color: #000000;
-  --feed-textarea-background-color: #e9e9e9;
+  --feed-textarea-background-color: #f3f1f1;
   --feed-popup-background-color: var(--background-color);
 }
 
 [theme="dark"] {
-  --shared-post-header-background-color: #18538f;
+  --shared-post-header-background-color: #00666d54;
   --feed-border-color: #ffffff;
-  --feed-textarea-background-color: #909090;
+  --feed-textarea-background-color: #2f2e2e;
   --feed-popup-background-color: var(--background-color);
 }
 
 .post {
-  border: 1px solid var(--feed-border-color);
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  position: relative; /* To ensure the like popup is positioned correctly */
+  position: relative;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  overflow: hidden; /* Ensure the blur doesn't overflow */
+  background-color: rgba(176, 238, 220, 0.368);
 }
 
+.post-actions {
+  width: 100%;
+  display: flex;
+  /*justify-content: flex-start;  Align everything to the left */
+  align-items: center;
+  margin-top: 10px;
+}
 .post h2 {
   margin-top: 0;
 }
 
 .comments {
-  border-top: 1px solid var(--feed-border-color);
-  margin-top: 16px;
-  padding-top: 8px;
+  border-bottom: 1px solid var(--feed-border-color);
+  padding: 8px 0;
 }
 
 .comment {
@@ -58,16 +65,19 @@
 .comment-form button {
   display: block;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #00666d;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
 }
-
+.like-container {
+  position: right;
+  margin-right: auto;
+}
 .comment-form button:hover {
-  background-color: #0056b3;
+  background-color: #00666dda;
 }
 
 .like-popup {
@@ -105,7 +115,7 @@
 }
 
 .post-actions button {
-  background-color: #007bff;
+  background-color: #00666d;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -120,12 +130,29 @@
   margin-right: 0;
 }
 
-.post-actions button:hover {
-  background-color: #0056b3;
+.post-actions .like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: white;
+  margin-left: 5px;
 }
+.post-actions .like-button.liked {
+  color: red;
+}
+.heart-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
 .follow-button {
   margin-left: 10px;
-  background-color: #007bff;
+  background-color: #00666d;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -135,7 +162,7 @@
 }
 
 .follow-button:hover {
-  background-color: #0056b3;
+  background-color: #00666dda;
 }
 .shared-header {
   background-color: var(--shared-post-header-background-color);
@@ -159,7 +186,7 @@
 }
 
 .original-post-link {
-  color: #007bff;
+  color: white;
   cursor: pointer;
 }
 
@@ -168,7 +195,7 @@
 }
 
 .modal-button {
-  background-color: #007bff;
+  background-color: #00666d;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -179,12 +206,12 @@
 }
 
 .modal-button:hover {
-  background-color: #0056b3;
+  background-color: #00666dda;
 }
 .message {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 4px;
   color: white;
-  background-color: #007bff;
+  background-color: #00666d;
 }
