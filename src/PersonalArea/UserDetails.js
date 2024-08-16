@@ -64,22 +64,29 @@ const UserDetails = ({ userData }) => {
             )}
           </label>
           {isEditing ? (
-            <button type="submit" style={{ marginLeft: "10px" }}>
+            <button 
+            type="submit" 
+            style={{ 
+              fontSize: "15px",
+              padding: "2px 6px",
+              marginLeft: "10px",
+              cursor: "pointer",
+              border: "none",
+              }}>
               Save
             </button>
           ) : (
             <button
-              type="button"
+              type="edit"
               onClick={handleEditToggle}
               style={{
-                fontSize: "12px",
+                fontSize: "15px",
                 padding: "2px 6px",
                 marginLeft: "10px",
                 cursor: "pointer",
                 border: "none",
-              }}
-            >
-              🖉
+              }}>
+              Edit
             </button>
           )}
         </form>
