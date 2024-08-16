@@ -30,6 +30,7 @@
   align-items: center;
   position: absolute;
   left: 10px;
+  bottom: 0px;
 }
 
 .theme-switcher-container a {
@@ -54,11 +55,13 @@
   align-items: center;
   position: absolute;
   right: 10px; /* Keep the greeting on the right */
+  bottom: 0px;
   font-family: "Roboto", sans-serif;
   /* letter-spacing: 1.5px; */
   -webkit-font-smoothing: antialiased;
   font-weight: bold;
   color: var(--navbar-text-color);
+  font-size: large;
 }
 
 .navbar-container {
