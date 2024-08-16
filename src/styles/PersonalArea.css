@@ -77,6 +77,7 @@ body {
 }
 
 .panel-container {
+  justify-content: center;
   display: flex;
   flex-grow: 1;
   padding: var(--spacing-unit);
