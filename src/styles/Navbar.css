@@ -128,5 +128,5 @@
 }
 
 .navbar ul li button:hover {
-  background-color: var(--navbar-text-color-hover);
+  color: var(--navbar-text-color-hover); 
 }
