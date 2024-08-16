@@ -2,14 +2,14 @@
   --nav-background-color: #eeeeee;
   --navbar-text-color: #6d6d6d;
   --navbar-text-color-hover: #252525;
-  /* --logopic: url("../logo/logo_light.png"); */
+  --logo-filter: invert(27%) sepia(14%) saturate(6154%) hue-rotate(151deg) brightness(98%) contrast(101%);
 }
 
 [theme="dark"] {
   --nav-background-color: #393732;
   --navbar-text-color: #ecebe2;
   --navbar-text-color-hover: #ffffff;
-  /* --logopic: url("../logo/logo_dark.png"); */
+  --logo-filter: invert(93%) sepia(3%) saturate(1301%) hue-rotate(328deg) brightness(109%) contrast(85%);
 }
 .header-container {
   width: 100%;
@@ -18,7 +18,6 @@
   align-items: center;
   background-color: var(--background-color);
   position: relative;
-  min-height: 110px;
 }
 
 .theme-switcher-container {
@@ -34,20 +33,18 @@
 }
 
 .theme-switcher-container a {
+  flex: 1;
   padding: 10px 15px;
 }
 
 .logo-container {
   justify-content: center;
-  flex: 1;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex: 0;
+  position: relative;
+  filter: var(--logo-filter);
+  left: 1.50%;
 }
 
-.logo {
-  height: 110px;
-}
 .greetings-container {
   margin-top: auto;
   list-style-type: none;

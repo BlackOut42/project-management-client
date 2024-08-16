@@ -4,14 +4,11 @@ import { AuthContext } from "./authContext";
 import ThemeSwitcher from "./ThemeSwitcher";
 import "./styles/Navbar.css";
 import "./styles/ToggleSwitch.css";
-import logoLight from "./logo/logo_light.png";
-import logoDark from "./logo/logo_dark.png";
+import { ReactComponent as LogoSvg } from "./logo/logo.svg";
 
 const NavBar = () => {
   const { authData, logout } = useContext(AuthContext);
   const user = authData?.user;
-  const currentTheme = document.documentElement.getAttribute("theme");
-  const logoSrc = currentTheme === "dark" ? logoDark : logoLight;
 
   return (
     <div>
@@ -21,7 +18,7 @@ const NavBar = () => {
         </ul>
 
         <Link to="/" className="logo-container">
-          <img src={logoSrc} alt="Logo" className="logo" />
+          <LogoSvg className="logo" />
         </Link>
 
         <ul className="greetings-container">
