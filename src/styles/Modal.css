@@ -1,3 +1,15 @@
+[theme="light"] {
+  --modal-border-color: #000000;
+  --modal-background-color: var(--background-color);
+  --modal-textarea-background-color: #e9e9e9;
+}
+
+[theme="dark"] {
+  --modal-border-color: #ffffff;
+  --modal-background-color: var(--background-color);
+  --modal-textarea-background-color: #909090;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -12,7 +24,7 @@
 }
 
 .modal-content {
-  background: #fff;
+  background: var(--modal-background-color);
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
@@ -29,12 +41,13 @@
 
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: -15px;
+  right: -15px;
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
+  color: black;
 }
 
 .modal-input,
@@ -42,7 +55,8 @@
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--modal-border-color);
+  background-color: var(--modal-textarea-background-color);
   border-radius: 4px;
   box-sizing: border-box; /* Ensure padding is included in the width */
 }
@@ -53,7 +67,7 @@
 }
 
 .modal-button {
-  background-color: #007bff;
+  background-color: #00666d;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -64,5 +78,5 @@
 }
 
 .modal-button:hover {
-  background-color: #0056b3;
+  background-color: #00666dda;
 }

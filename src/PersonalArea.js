@@ -2,6 +2,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "./authContext";
 import Sidebar from "./PersonalArea/Sidebar";
+import PanelContainer from "./PersonalArea/PanelContainer";
 import UserDetails from "./PersonalArea/UserDetails";
 import ChangePassword from "./PersonalArea/ChangePassword";
 import DeleteAccount from "./PersonalArea/DeleteAccount";
@@ -42,7 +43,7 @@ const PersonalArea = () => {
     return (
       <div className="personalarea-container">
         <Sidebar onSelectPanel={setSelectedPanel} />
-        <div className="panel-container">{renderPanel()}</div>
+        <PanelContainer renderPanel={renderPanel} />
       </div>
     );
   } else {

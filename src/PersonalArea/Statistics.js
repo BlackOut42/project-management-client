@@ -47,7 +47,7 @@ const Statistics = ({ userData }) => {
           <li>Followers: {statistics.followersCount}</li>
           <li>Liked Posts: {statistics.likedPostsCount}</li>
           <li>Bookmarked Posts: {statistics.bookmarkedCount}</li>
-          <li>Your Posts: {statistics.postsCount}</li>
+          <li>Posts Published: {statistics.postsCount}</li>
         </ul>
       ) : (
         <p>Failed to load statistics.</p>

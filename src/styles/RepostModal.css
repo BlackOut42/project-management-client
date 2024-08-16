@@ -1,9 +1,21 @@
 /* RepostModal.css */
+
+[theme="light"] {
+  --repostmodal-border-color: #000000;
+  --repostmodal-textarea-background-color: #e9e9e9;
+}
+
+[theme="dark"] {
+  --repostmodal-border-color: #ffffff;
+  --repostmodal-textarea-background-color: #909090;
+}
+
 .RepostModal-input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--repostmodal-border-color);
+  background-color: var(--repostmodal-textarea-background-color);
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -12,7 +24,8 @@
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--repostmodal-border-color);
+  background-color: var(--repostmodal-textarea-background-color);
   border-radius: 4px;
   box-sizing: border-box;
   resize: none; /* Prevent resizing */
@@ -20,7 +33,7 @@
 }
 
 .RepostModal-button {
-  background-color: #007bff;
+  background-color: #00666d;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -31,5 +44,5 @@
 }
 
 .RepostModal-button:hover {
-  background-color: #0056b3;
+  background-color: #00666dda;
 }

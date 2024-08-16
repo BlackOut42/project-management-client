@@ -370,45 +370,54 @@ const Post = ({
         )}
       </div>
       <div className="post-actions">
-        <div
-          className="like-container"
-          style={{ position: "relative", display: "inline-block" }}
-        >
+        <div className="like-container">
           <button
             onClick={() => handleToggleLike(post.id)}
             onMouseEnter={() => handleMouseEnter(post.id)}
             onMouseLeave={handleMouseLeave}
+            className={`like-button ${
+              likes.includes(currentUser?.uid) ? "liked" : ""
+            }`}
+            aria-label={likes.includes(currentUser?.uid) ? "Unlike" : "Like"}
           >
-            {likes.includes(currentUser?.uid) ? "Liked" : "Like"} ({likeCount})
+            <span className="heart-icon">
+              {likes.includes(currentUser?.uid) ? "❤️" : "🤍"}
+            </span>
+            <span className="like-count">({likeCount})</span>
           </button>
           <div className={`like-popup ${likePopupVisible ? "visible" : ""}`}>
             People who liked this post: <br />
             {likeNames.length > 0 ? likeNames.join(", ") : "No likes yet"}
           </div>
         </div>
-        {currentUser && (
-          <>
-            <button onClick={handleToggleBookmark} className="bookmark-button">
-              {isBookmarked ? "Saved" : "Save"}
-            </button>
-            {!post.repostedBy && (
-              <>
-                <button
-                  onClick={() => setIsSharing(true)}
-                  className="share-button"
-                >
-                  Share
-                </button>
-                <button
-                  onClick={() => setIsReposting(true)}
-                  className="repost-button"
-                >
-                  Repost
-                </button>
-              </>
-            )}
-          </>
-        )}
+        <div className="rest-buttons-container">
+          {currentUser && (
+            <>
+              <button
+                onClick={handleToggleBookmark}
+                className="bookmark-button"
+              >
+                {isBookmarked ? "Saved" : "Save"}
+              </button>
+              {!post.repostedBy && (
+                <>
+                  <button
+                    onClick={() => setIsReposting(true)}
+                    className="repost-button"
+                  >
+                    Repost
+                  </button>
+                  <button
+                    onClick={() => setIsSharing(true)}
+                    className="share-button"
+                  >
+                    Share
+                  </button>
+                </>
+              )}
+            </>
+          )}
+        </div>
       </div>
       {comments.length > 0 && (
         <div className="comments">

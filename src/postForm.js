@@ -71,7 +71,7 @@ const PostForm = () => {
   return (
     <div className="PostForm-container">
       <button onClick={toggleFormVisibility} className="PostForm-button">
-        {isFormVisible ? "Cancel" : "Create Post"}
+        {isFormVisible ? "CANCEL" : "C R E A T E      N E W      P O S T"}
       </button>
       <div className={`PostForm-form ${isFormVisible ? "visible" : ""}`}>
         <h2>Create Post</h2>
