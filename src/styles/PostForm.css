@@ -23,7 +23,7 @@
 
 /* Form styles for the post form */
 .PostForm-form {
-  max-width: 300px;
+  max-width: 750px;
   padding: 20px;
   border: 1px solid var(--postform-border-color);
   border-radius: 8px;
