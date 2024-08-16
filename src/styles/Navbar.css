@@ -2,34 +2,34 @@
   --nav-background-color: #eeeeee;
   --navbar-text-color: #6d6d6d;
   --navbar-text-color-hover: #252525;
-  --logo-filter: invert(27%) sepia(14%) saturate(6154%) hue-rotate(151deg) brightness(98%) contrast(101%);
+  --logo-filter: invert(27%) sepia(14%) saturate(6154%) hue-rotate(151deg)
+    brightness(98%) contrast(101%);
 }
 
 [theme="dark"] {
   --nav-background-color: #393732;
   --navbar-text-color: #ecebe2;
   --navbar-text-color-hover: #ffffff;
-  --logo-filter: invert(93%) sepia(3%) saturate(1301%) hue-rotate(328deg) brightness(109%) contrast(85%);
+  --logo-filter: invert(93%) sepia(3%) saturate(1301%) hue-rotate(328deg)
+    brightness(109%) contrast(85%);
 }
 .header-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: var(--background-color);
   position: relative;
 }
 
 .theme-switcher-container {
-  /* margin-top: auto; 
-  padding: 10px;
-  display: flex; */
-
   list-style-type: none;
   margin-top: auto;
   padding-right: 30px;
   display: flex;
   align-items: center;
+  position: absolute;
+  left: 10px;
 }
 
 .theme-switcher-container a {
@@ -38,27 +38,29 @@
 }
 
 .logo-container {
-  justify-content: center;
   flex: 0;
+  display: flex;
+  justify-content: center;
   position: relative;
   filter: var(--logo-filter);
-  left: 1.50%;
+  left: 0; /* Center the logo */
 }
 
 .greetings-container {
-  margin-top: auto;
   list-style-type: none;
-  padding-right: 30px;
+  margin-top: auto;
+  padding-right: 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-
+  position: absolute;
+  right: 10px; /* Keep the greeting on the right */
   font-family: "Roboto", sans-serif;
   /* letter-spacing: 1.5px; */
   -webkit-font-smoothing: antialiased;
   font-weight: bold;
   color: var(--navbar-text-color);
 }
+
 .navbar-container {
   width: 100%;
   /* padding: 10px 10px; */
