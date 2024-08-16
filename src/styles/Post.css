@@ -10,6 +10,7 @@
   --feed-border-color: #ffffff;
   --feed-textarea-background-color: #909090;
   --feed-popup-background-color: var(--background-color);
+
 }
 
 .post {
@@ -142,12 +143,20 @@
   color: white;
   margin-left: 5px;
 }
-.post-actions .like-button.liked {
-  color: red;
-}
+
 .heart-icon {
   font-size: 32px;
   line-height: 1;
+}
+
+.post-actions .like-count{
+  margin: 5px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.post-actions .like-count.liked{
+  color: red;
 }
 
 .follow-button {
@@ -164,6 +173,7 @@
 .follow-button:hover {
   background-color: #00666dda;
 }
+
 .shared-header {
   background-color: var(--shared-post-header-background-color);
   padding: 8px;
