@@ -18,6 +18,7 @@
   align-items: center;
   background-color: var(--background-color);
   position: relative;
+  min-height: 110px;
 }
 
 .theme-switcher-container {
@@ -37,11 +38,11 @@
 }
 
 .logo-container {
-  /*padding: center;*/
-  display: flex;
   justify-content: center;
   flex: 1;
-  /*background-image: var(--logopic);*/
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .logo {
@@ -128,5 +129,5 @@
 }
 
 .navbar ul li button:hover {
-  color: var(--navbar-text-color-hover); 
+  color: var(--navbar-text-color-hover);
 }
