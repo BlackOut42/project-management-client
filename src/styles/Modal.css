@@ -27,7 +27,7 @@
   background: var(--modal-background-color);
   padding: 20px;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 850px;
   width: 100%;
   max-height: 80vh; /* Set max-height to allow scrolling if content is too large */
   overflow-y: auto; /* Enable vertical scrolling */
@@ -37,17 +37,6 @@
   transform: translate(-50%, -50%);
   box-sizing: border-box; /* Ensure padding is included in the width */
   z-index: 1000; /* Ensure modal content is above overlay */
-}
-
-.modal-close {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: black;
 }
 
 .modal-input,
