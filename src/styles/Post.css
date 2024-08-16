@@ -48,7 +48,7 @@
 }
 
 .comment small {
-  color: #666;
+  color: var(--feed-border-color);
 }
 .comment-form textarea {
   width: 100%;
