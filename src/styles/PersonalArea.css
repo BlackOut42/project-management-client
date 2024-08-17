@@ -3,7 +3,7 @@
 :root {
   --primary-light-color: #919191;
   --primary-dark-color: #00666d;
-  --accent-color: #b0eedc;
+  --accent-color: #4eba9b;
   --danger-color: #e63946;
   --danger-hover-color: #d62828;
   --text-color-light: #000000;
@@ -44,9 +44,9 @@ body {
 
 .personalarea-container {
   display: flex;
+  justify-content: center;
   /*gap: var(--spacing-unit);*/
 }
-
 .sidebar {
   /* margin-top: 50px;
   width: 150px;
@@ -64,6 +64,8 @@ body {
   background: var(--primary-dark-color);
   overflow-x: hidden;
   padding: 8px 0;
+  text-align: center;
+  align-items: center;
 }
 
 .sidebar ul {
@@ -95,7 +97,7 @@ body {
   padding: var(--spacing-unit);
   background-color: var(--background-color-light);
   border-radius: var(--border-radius);
-  box-shadow: 2px 2px 10px var(--box-shadow-color);
+  /* box-shadow: 2px 2px 10px var(--box-shadow-color); */
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 

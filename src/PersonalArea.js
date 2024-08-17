@@ -42,8 +42,14 @@ const PersonalArea = () => {
   if (authData) {
     return (
       <div className="personalarea-container">
-        <Sidebar onSelectPanel={setSelectedPanel} />
-        <PanelContainer renderPanel={renderPanel} />
+        <div className="personal-cont">
+          <div className="sidebar">
+            <Sidebar onSelectPanel={setSelectedPanel} />
+          </div>
+          <div className="panel-container">
+            <PanelContainer renderPanel={renderPanel} />
+          </div>
+        </div>
       </div>
     );
   } else {
