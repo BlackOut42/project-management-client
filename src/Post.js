@@ -191,7 +191,7 @@ const Post = ({
     try {
       const response = await axios.post(
         `https://project-management-server-4av5.onrender.com/toggle-follow/${
-          post.repostedByUid || post.sharedByUid || post.uid
+          post.uid || post.repostedByUid || post.sharedByUid
         }`,
         {},
         {
